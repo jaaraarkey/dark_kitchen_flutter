@@ -1,3 +1,5 @@
+import 'package:black_kitchen/screens/meal_details.dart';
+import 'package:black_kitchen/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 import 'package:black_kitchen/models/meal.dart';
 
@@ -7,11 +9,20 @@ class MealsScreen extends StatelessWidget {
   final String title;
   final List<Meal> meals;
 
+  void selectMeal(BuildContext context, Meal meal) {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (ctx) => MealDetailsScreen(meal: meal)));
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemCount: meals.length, // Ensure you specify the itemCount
-      itemBuilder: (context, index) => Text(meals[index].title),
+      itemBuilder: (context, index) => MealItem(
+          meal: meals[index],
+          onSelectMeal: (BuildContext context, Meal meal) {
+            selectMeal(context, meal);
+          }),
     );
 
     if (meals.isEmpty) {
