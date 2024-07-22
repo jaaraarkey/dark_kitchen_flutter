@@ -1,4 +1,5 @@
-import 'package:black_kitchen/screens/categories.dart';
+// import 'package:black_kitchen/screens/categories.dart';
+import 'package:black_kitchen/screens/tabs_screen.dart';
 // import 'package:black_kitchen/screens/meals.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +24,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: const CategoriesScreen(),
+      home: const TabsScreen(),
     );
   }
 }
