@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({super.key});
+  const MainDrawer({super.key, required this.onSelectScreen});
+  final void Function(String indentifier) onSelectScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -10,10 +11,10 @@ class MainDrawer extends StatelessWidget {
         child: Column(
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(colors: [
-                  Theme.of(context).colorScheme.primary,
-                  Theme.of(context).colorScheme.primary.withOpacity(0.9)
+                  Color.fromARGB(255, 255, 2, 78),
+                  Color.fromARGB(255, 255, 2, 78),
                 ], begin: Alignment.topLeft, end: Alignment.bottomRight),
               ),
               child: Row(
@@ -23,8 +24,10 @@ class MainDrawer extends StatelessWidget {
                   // const SizedBox(width: 16),
                   Text(
                     'Menu',
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .copyWith(color: Colors.white),
                   )
                 ],
               ),
@@ -35,17 +38,18 @@ class MainDrawer extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface)),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed('/');
+                onSelectScreen('meals');
+                // Navigator.of(context).pushReplacementNamed('/');
               },
             ),
             ListTile(
               leading: const Icon(Icons.settings, size: 24),
-              title: Text('Settings',
+              title: Text('filters',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface)),
               onTap: () {
+                onSelectScreen('filters');
                 // todo implement settings screen, routing
-                ;
               },
             ),
           ],
