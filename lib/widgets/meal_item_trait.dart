@@ -11,14 +11,14 @@ class MealItemTrait extends StatelessWidget {
     return Row(children: [
       Icon(
         icon,
-        size: 24,
+        size: 16,
         color: Theme.of(context).colorScheme.onSurface,
       ),
       const SizedBox(width: 8),
       Text(label,
           style: Theme.of(context)
               .textTheme
-              .bodyLarge!
+              .bodySmall!
               .copyWith(color: Theme.of(context).colorScheme.onSurface)),
     ]);
   }
