@@ -1,6 +1,4 @@
-// import 'package:black_kitchen/screens/categories.dart';
 import 'package:black_kitchen/screens/tabs_screen.dart';
-// import 'package:black_kitchen/screens/meals.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

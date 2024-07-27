@@ -19,9 +19,6 @@ class MainDrawer extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  // Icon(Icons.restaurant,
-                  //     size: 36, color: Theme.of(context).colorScheme.onPrimary),
-                  // const SizedBox(width: 16),
                   Text(
                     'Menu',
                     style: Theme.of(context)
@@ -39,7 +36,6 @@ class MainDrawer extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onSurface)),
               onTap: () {
                 onSelectScreen('meals');
-                // Navigator.of(context).pushReplacementNamed('/');
               },
             ),
             ListTile(
@@ -49,7 +45,6 @@ class MainDrawer extends StatelessWidget {
                       color: Theme.of(context).colorScheme.onSurface)),
               onTap: () {
                 onSelectScreen('filters');
-                // todo implement settings screen, routing
               },
             ),
           ],

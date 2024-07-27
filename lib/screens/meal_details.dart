@@ -1,15 +1,15 @@
 import 'package:black_kitchen/models/meal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:black_kitchen/providers/favorites_provider.dart';
 
-class MealDetailsScreen extends StatelessWidget {
-  MealDetailsScreen(
-      {super.key, required this.meal, required this.onToggleFavorite});
+class MealDetailsScreen extends ConsumerWidget {
+  const MealDetailsScreen({super.key, required this.meal});
 
-  void Function(Meal meal) onToggleFavorite;
   final Meal meal;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -20,7 +20,19 @@ class MealDetailsScreen extends StatelessWidget {
               size: 30,
             ),
             onPressed: () {
-              onToggleFavorite(meal);
+              final wasAdded = ref
+                  .read(favoritesProvider.notifier)
+                  .toggleFavoriteMealStatus(meal);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    wasAdded ? 'Added to favorites' : 'Removed from favorites',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
             },
           ),
         ],
@@ -58,14 +70,6 @@ class MealDetailsScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Text('Step ${meal.steps.indexOf(step) + 1}',
-                    //     style: Theme.of(context)
-                    //         .textTheme
-                    //         .titleMedium!
-                    //         .copyWith(
-                    //             color: Theme.of(context).colorScheme.onSurface,
-                    //             fontWeight: FontWeight.bold)),
-                    // // const SizedBox(height: 8),
                     Text('- $step',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context)

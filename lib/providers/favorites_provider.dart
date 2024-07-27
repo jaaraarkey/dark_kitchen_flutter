@@ -9,13 +9,15 @@ class FavoritesNotifier extends StateNotifier<List<Meal>> {
   ///
   /// If the meal is already a favorite, it will be removed from the list of favorites.
   /// If the meal is not a favorite, it will be added to the list of favorites.
-  void toggleFavoriteMealStatus(Meal meal) {
+  bool toggleFavoriteMealStatus(Meal meal) {
     final mealIsFavorite = state.contains(meal);
 
     if (mealIsFavorite) {
       state = state.where((m) => m.id != meal.id).toList();
+      return false;
     } else {
       state = [...state, meal];
+      return true;
     }
   }
 }

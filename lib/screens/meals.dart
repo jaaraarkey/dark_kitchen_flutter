@@ -4,23 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:black_kitchen/models/meal.dart';
 
 class MealsScreen extends StatelessWidget {
-  MealsScreen(
-      {super.key,
-      required this.meals,
-      required this.title,
-      required this.onToggleFavorite});
+  const MealsScreen({
+    super.key,
+    required this.meals,
+    required this.title,
+  });
 
   final String? title;
   final List<Meal> meals;
-  void Function(Meal meal) onToggleFavorite;
 
   void selectMeal(BuildContext context, Meal meal) {
-    // Navigator.pop(context);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => MealDetailsScreen(
           meal: meal,
-          onToggleFavorite: onToggleFavorite,
         ),
       ),
     );
@@ -31,10 +28,11 @@ class MealsScreen extends StatelessWidget {
     Widget content = ListView.builder(
       itemCount: meals.length, // Ensure you specify the itemCount
       itemBuilder: (context, index) => MealItem(
-          meal: meals[index],
-          onSelectMeal: (BuildContext context, Meal meal) {
-            selectMeal(context, meal);
-          }),
+        meal: meals[index],
+        onSelectMeal: (BuildContext context, Meal meal) {
+          selectMeal(context, meal);
+        },
+      ),
     );
 
     if (meals.isEmpty) {
@@ -50,7 +48,6 @@ class MealsScreen extends StatelessWidget {
                   .copyWith(color: Theme.of(context).colorScheme.onSurface),
             ),
             const SizedBox(height: 16),
-            // const Icon(Icons.sentiment_dissatisfied, size: 48),
             const SizedBox(height: 16),
             Text(
               'Please choose another category.',
