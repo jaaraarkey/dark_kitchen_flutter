@@ -10,13 +10,17 @@ class MealDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favoritMeals = ref.watch(favoritesProvider);
+
+    final isFavorite = favoritMeals.contains(meal);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.favorite,
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
               size: 30,
             ),
             onPressed: () {
@@ -43,11 +47,14 @@ class MealDetailsScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                meal.imageUrl,
-                width: double.infinity,
-                height: 300,
-                fit: BoxFit.cover,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.network(
+                  meal.imageUrl,
+                  width: double.infinity,
+                  height: 300,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(height: 16),
               Column(
@@ -61,7 +68,7 @@ class MealDetailsScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 8),
               for (final ingredients in meal.ingredients)
-                Text(ingredients,
+                Text('- $ingredients',
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         )),
