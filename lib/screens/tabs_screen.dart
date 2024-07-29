@@ -1,4 +1,4 @@
-import 'package:black_kitchen/providers/meals_provider.dart'; // Importing meals_provider.dart file
+// import 'package:black_kitchen/providers/meals_provider.dart'; // Importing meals_provider.dart file
 import 'package:black_kitchen/screens/categories.dart'; // Importing categories.dart file
 import 'package:black_kitchen/screens/meals.dart'; // Importing meals.dart file
 import 'package:black_kitchen/widgets/main_drawer.dart'; // Importing main_drawer.dart file
@@ -39,29 +39,15 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final meals = ref.watch(mealsProvider);
-    final activeFilters = ref.watch(filtersProvider);
+    // final meals = ref.watch(mealsProvider);
+    // final activeFilters = ref.watch(filtersProvider);
 
-    final availableMeals = meals.where((meal) {
-      if (activeFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
-        return false;
-      }
-      if (activeFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
-        return false;
-      }
-      if (activeFilters[Filter.vegetarian]! && !meal.isVegetarian) {
-        return false;
-      }
-      if (activeFilters[Filter.vegan]! && !meal.isVegan) {
-        return false;
-      }
-      return true;
-    }).toList();
+    final availableMeals = ref.watch(filteredMealsProvider);
 
     Widget selectedPage = CategoriesScreen(
-      // Initializing the selectedPage widget with CategoriesScreen
-      availableMeals: availableMeals,
-    );
+        // Initializing the selectedPage widget with CategoriesScreen
+        availableMeals: availableMeals);
+
     var selectedPageTitle =
         'Categories'; // Initializing the selectedPageTitle variable with 'Categories'
 
