@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:black_kitchen/data/dummy_data.dart';
 import 'package:black_kitchen/screens/meals.dart';
 import 'package:black_kitchen/widgets/category_grid_item.dart';

@@ -19,9 +19,16 @@ class MealDetailsScreen extends ConsumerWidget {
         title: Text(meal.title),
         actions: [
           IconButton(
-            icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-              size: 30,
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder: (child, animation) {
+                return ScaleTransition(
+                  scale: animation,
+                  child: child,
+                );
+              },
+              child: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,
+                  key: ValueKey(isFavorite)),
             ),
             onPressed: () {
               final wasAdded = ref
